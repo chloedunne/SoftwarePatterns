@@ -104,6 +104,8 @@ public class Employee{
 	public void setFullTime(boolean fullTime) {
 		this.fullTime = fullTime;
 	}
+	
+	
 
 	// Display Employee details
 	public String toString() {
