@@ -357,7 +357,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		if (isSomeoneToDisplay())
 			new SearchBySurnameDialog(EmployeeDetails.this);
 	}// end displaySearchBySurnameDialog
-/*
+
 	// find byte start in file for first active record
 	private void firstRecord() {
 		// if any active record in file look for first record
@@ -432,7 +432,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			if (currentEmployee.getEmployeeId() == 0)
 				previousRecord();// look for previous record
 		} // end if
-	}// end lastRecord */
+	}// end lastRecord 
 
 	// search Employee by ID
 	public void searchEmployeeById() {
@@ -585,7 +585,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		Vector<Object> empDetails;// vector of each employee details
 		long byteStart = currentByteStart;
 		int firstId;
-
+		if(isSomeoneToDisplay()) {
 		currentEmployee = EmployeeRecords.firstRecord(file, currentByteStart);// look for first record
 		firstId = currentEmployee.getEmployeeId();
 		// loop until all Employees are added to vector
@@ -604,7 +604,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			currentEmployee = EmployeeRecords.nextRecord(file, currentByteStart);// look for next record
 		} while (firstId != currentEmployee.getEmployeeId());// end do - while
 		currentByteStart = byteStart;
-
+		}
 		return allEmployee;
 	}// end getAllEmployees
 
@@ -823,8 +823,10 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			file = newFile;// assign opened file to file
 			// open file for reading
 			application.openReadFile(file.getAbsolutePath());
+			if(isSomeoneToDisplay()) {
 			currentEmployee = EmployeeRecords.firstRecord(file, currentByteStart);// look for first record
 			displayRecords(currentEmployee);
+			}
 			application.closeReadFile();// close file for reading
 		} // end if
 	}// end openFile
@@ -1014,22 +1016,22 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		} else if (e.getSource() == cancelChange)
 			cancelChange();
 		else if (e.getSource() == firstItem || e.getSource() == first) {
-			if (checkInput() && !checkForChanges()) {
+			if (checkInput() && !checkForChanges() && isSomeoneToDisplay()) {
 				currentEmployee = EmployeeRecords.firstRecord(file, currentByteStart);
 				displayRecords(currentEmployee);
 			}
 		} else if (e.getSource() == prevItem || e.getSource() == previous) {
-			if (checkInput() && !checkForChanges()) {
+			if (checkInput() && !checkForChanges() && isSomeoneToDisplay()) {
 				currentEmployee = EmployeeRecords.previousRecord(file, currentByteStart);
 				displayRecords(currentEmployee);
 			}
 		} else if (e.getSource() == nextItem || e.getSource() == next) {
-			if (checkInput() && !checkForChanges()) {
+			if (checkInput() && !checkForChanges() && isSomeoneToDisplay()) {
 				currentEmployee = EmployeeRecords.nextRecord(file, currentByteStart);
 				displayRecords(currentEmployee);
 			}
 		} else if (e.getSource() == lastItem || e.getSource() == last) {
-			if (checkInput() && !checkForChanges()) {
+			if (checkInput() && !checkForChanges() && isSomeoneToDisplay()) {
 				currentEmployee = EmployeeRecords.lastRecord(file, currentByteStart);
 				displayRecords(currentEmployee);
 			}
