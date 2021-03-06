@@ -883,29 +883,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			System.exit(0);// exit application
 		} // end else
 	}// end exitApp
-
-	// generate 20 character long file name
-	private String getFileName() {
-		String fileNameChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-";
-		StringBuilder fileName = new StringBuilder();
-		Random rnd = new Random();
-		// loop until 20 character long file name is generated
-		while (fileName.length() < 20) {
-			int index = (int) (rnd.nextFloat() * fileNameChars.length());
-			fileName.append(fileNameChars.charAt(index));
-		}
-		String generatedfileName = fileName.toString();
-		return generatedfileName;
-	}// end getFileName
-
-	// create file with generated file name when application is opened
-	private void createRandomFile() {
-		generatedFileName = getFileName() + ".dat";
-		// assign generated file name to file
-		file = new File(generatedFileName);
-		// create file
-		application.createFile(file.getName());
-	}// end createRandomFile
+	
 
 	// action listener for buttons, text field and menu items
 	public void actionPerformed(ActionEvent e) {
@@ -981,7 +959,8 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	// content pane for main dialog
 	private void createContentPane() {
 		setTitle("Employee Details");
-		createRandomFile();// create random file name
+		generatedFileName = RandomFile.getFileName();
+		RandomFile.createRandomFile(generatedFileName, file);// create random file name
 		JPanel dialog = new JPanel(new MigLayout());
 
 		setJMenuBar(menuBar());// add menu bar to frame

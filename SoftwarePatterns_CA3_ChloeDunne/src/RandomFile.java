@@ -5,9 +5,11 @@
  * */
 
 import java.io.EOFException;
+import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 
@@ -16,7 +18,7 @@ public class RandomFile {
 	private RandomAccessFile input;
 
 	// Create new file
-	public void createFile(String fileName) {
+	public static void createFile(String fileName) {
 		RandomAccessFile file = null;
 
 		try // open file for reading and writing
@@ -290,4 +292,27 @@ public class RandomFile {
 
 		return someoneToDisplay;
 	}// end isSomeoneToDisplay
+	
+	// generate 20 character long file name
+	public static String getFileName() {
+		String fileNameChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-";
+		StringBuilder fileName = new StringBuilder();
+		Random rnd = new Random();
+		// loop until 20 character long file name is generated
+		while (fileName.length() < 20) {
+			int index = (int) (rnd.nextFloat() * fileNameChars.length());
+			fileName.append(fileNameChars.charAt(index));
+		}
+		String generatedfileName = fileName.toString();
+		return generatedfileName;
+	}// end getFileName
+
+	// create file with generated file name when application is opened
+	public static void createRandomFile(String generatedFileName, File file) {
+		generatedFileName = getFileName() + ".dat";
+		// assign generated file name to file
+		file = new File(generatedFileName);
+		// create file
+		createFile(file.getName());
+	}// end createRandomFile
 }// end class RandomFile
