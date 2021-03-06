@@ -308,11 +308,12 @@ public class RandomFile {
 	}// end getFileName
 
 	// create file with generated file name when application is opened
-	public static void createRandomFile(String generatedFileName, File file) {
+	public static File createRandomFile(String generatedFileName, File file) {
 		generatedFileName = getFileName() + ".dat";
 		// assign generated file name to file
 		file = new File(generatedFileName);
 		// create file
 		createFile(file.getName());
+		return file;
 	}// end createRandomFile
 }// end class RandomFile

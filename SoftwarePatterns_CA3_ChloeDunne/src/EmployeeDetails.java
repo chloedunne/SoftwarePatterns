@@ -960,7 +960,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	private void createContentPane() {
 		setTitle("Employee Details");
 		generatedFileName = RandomFile.getFileName();
-		RandomFile.createRandomFile(generatedFileName, file);// create random file name
+		file = RandomFile.createRandomFile(generatedFileName, file);// create random file name
 		JPanel dialog = new JPanel(new MigLayout());
 
 		setJMenuBar(menuBar());// add menu bar to frame
